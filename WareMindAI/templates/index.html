@@ -3,12 +3,156 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WareMind AI</title>
+    <title>WAREMIND // NEXUS — AI Warehouse Command Center</title>
+    <meta
+      name="description"
+      content="WAREMIND // NEXUS is an AI warehouse command center: predictive allocation, bottleneck detection and live fulfillment control."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/static/style.css" />
   </head>
   <body>
-    <h1 id="title">WareMind AI is running </h1>
-    <p>Step 1 complete. Backend + frontend are connected.</p>
+    <div class="grid-bg" aria-hidden="true"></div>
+
+    <!-- ===== TOP BAR ===== -->
+    <header class="topbar">
+      <div class="brand">
+        <span class="logo-mark">◈</span>
+        <span class="brand-text">WAREMIND <em>//</em> NEXUS</span>
+      </div>
+      <div class="topbar-right">
+        <span class="status-pill"><i class="dot live"></i> SYSTEMS NOMINAL</span>
+        <span class="clock" id="clock">--:--:--</span>
+        <button class="btn-sim" id="btnSim">▶ RUN WAREHOUSE SIMULATION</button>
+      </div>
+    </header>
+
+    <main class="shell">
+      <!-- ===== HERO ===== -->
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">AI WAREHOUSE COMMAND CENTER</p>
+          <h1>WAREMIND <em>//</em> NEXUS</h1>
+          <p class="tagline">"Predict. Decide. Fulfill."</p>
+          <div class="hero-stats">
+            <div><b id="hsOrders">0</b><span>ACTIVE ORDERS</span></div>
+            <div><b id="hsSkus">0</b><span>SKUs TRACKED</span></div>
+            <div><b id="hsRisk">0</b><span>AT-RISK SKUs</span></div>
+            <div><b id="hsThru">0%</b><span>THROUGHPUT</span></div>
+          </div>
+        </div>
+
+        <!-- AI DECISION ENGINE -->
+        <div class="panel engine">
+          <div class="panel-head">
+            <h2><span class="pulse-ring"></span>AI DECISION ENGINE</h2>
+            <span class="engine-count" id="engineCount">3 decisions require attention</span>
+          </div>
+          <div class="decision-list" id="decisionList"></div>
+        </div>
+      </section>
+
+      <!-- ===== ROW: MAP + RADAR ===== -->
+      <section class="row row-2">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>INTERACTIVE WAREHOUSE MAP</h2>
+            <span class="legend">
+              <i class="dot ok"></i>healthy <i class="dot warn"></i>attention
+              <i class="dot crit"></i>critical
+            </span>
+          </div>
+          <div class="map" id="map"></div>
+          <div class="zone-detail" id="zoneDetail">
+            <p class="muted">Select a zone to inspect live operations.</p>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>ORDER PRIORITY RADAR</h2>
+            <span class="muted small">click a ring to filter</span>
+          </div>
+          <div class="radar" id="radar">
+            <div class="radar-sweep"></div>
+            <button class="ring r1" data-priority="Critical"><span>CRITICAL</span><b id="pcCritical">0</b></button>
+            <button class="ring r2" data-priority="High"><span>HIGH</span><b id="pcHigh">0</b></button>
+            <button class="ring r3" data-priority="Medium"><span>MEDIUM</span><b id="pcMedium">0</b></button>
+            <button class="ring r4" data-priority="Normal"><span>NORMAL</span><b id="pcNormal">0</b></button>
+          </div>
+          <div class="order-list" id="orderList"></div>
+        </div>
+      </section>
+
+      <!-- ===== PIPELINE ===== -->
+      <section class="panel">
+        <div class="panel-head">
+          <h2>FULFILLMENT PIPELINE</h2>
+          <span class="muted small">orders per stage</span>
+        </div>
+        <div class="pipeline" id="pipeline"></div>
+      </section>
+
+      <!-- ===== ROW: INVENTORY + BOTTLENECK ===== -->
+      <section class="row row-2">
+        <div class="panel">
+          <div class="panel-head"><h2>INVENTORY HEALTH</h2></div>
+          <div class="inv-list" id="invList"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><h2>BOTTLENECK DETECTION</h2></div>
+          <div class="bottlenecks" id="bottlenecks"></div>
+        </div>
+      </section>
+
+      <!-- ===== ROW: FEED + ACTIONS ===== -->
+      <section class="row row-2">
+        <div class="panel">
+          <div class="panel-head">
+            <h2><span class="pulse-ring"></span>REAL-TIME DECISION FEED</h2>
+          </div>
+          <ul class="feed" id="feed"></ul>
+        </div>
+
+        <div class="panel danger-panel">
+          <div class="panel-head"><h2>CRITICAL ACTION CENTER</h2></div>
+          <div class="actions" id="actions"></div>
+        </div>
+      </section>
+
+      <footer class="foot">
+        WAREMIND // NEXUS · Predict. Decide. Fulfill. · autonomous fulfillment intelligence
+      </footer>
+    </main>
+
+    <!-- ===== EXPLAIN MODAL ===== -->
+    <div class="modal-backdrop" id="modal" hidden>
+      <div class="modal">
+        <button class="modal-close" id="modalClose">✕</button>
+        <p class="eyebrow">AI EXPLAINABILITY</p>
+        <h3>WHY THIS DECISION?</h3>
+        <div id="modalBody"></div>
+      </div>
+    </div>
+
+    <!-- ===== SIMULATION OVERLAY ===== -->
+    <div class="sim-backdrop" id="simOverlay" hidden>
+      <div class="sim-panel">
+        <div class="panel-head">
+          <h2><span class="pulse-ring"></span>WAREHOUSE SIMULATION</h2>
+          <button class="modal-close" id="simClose">✕</button>
+        </div>
+        <div class="sim-progress"><i id="simBar"></i></div>
+        <ol class="sim-steps" id="simSteps"></ol>
+      </div>
+    </div>
+
     <script src="/static/script.js"></script>
   </body>
 </html>
