@@ -201,7 +201,7 @@ button.act.danger:hover { background: rgba(239, 68, 68, 0.16); }
 
 /* RADAR */
 .radar {
-  position: relative; height: 260px; display: grid; place-items: center;
+  position: relative; height: 300px; display: grid; place-items: center;
   border: 1px solid var(--line); border-radius: 12px; overflow: hidden;
   background: radial-gradient(circle at 50% 50%, rgba(34, 211, 238, 0.08), transparent 70%);
 }
@@ -217,15 +217,15 @@ button.act.danger:hover { background: rgba(239, 68, 68, 0.16); }
   display: grid; place-content: center; text-align: center; transition: all 0.2s;
   font-family: "IBM Plex Mono", monospace;
 }
-.ring span { font-size: 9px; letter-spacing: 0.14em; color: var(--muted); }
-.ring b { font-size: 18px; color: var(--cyan); }
+.ring span { font-size: 8px; letter-spacing: 0.14em; color: var(--muted); }
+.ring b { font-size: 15px; color: var(--cyan); }
 .ring:hover, .ring.active { background: rgba(34, 211, 238, 0.16); border-color: var(--cyan); }
 .r1 { width: 84px; height: 84px; border-color: rgba(239, 68, 68, 0.6); place-content: center; }
 .r1 b { color: #fca5a5; }
-.r2, .r3, .r4 { place-content: start center; padding-top: 10px; }
-.r2 { width: 152px; height: 152px; }
-.r3 { width: 212px; height: 212px; }
-.r4 { width: 262px; height: 262px; }
+.r2, .r3, .r4 { place-content: start center; padding-top: 7px; }
+.r2 { width: 148px; height: 148px; }
+.r3 { width: 214px; height: 214px; }
+.r4 { width: 278px; height: 278px; }
 .ring b { line-height: 1.1; }
 
 .order-list { margin-top: 14px; display: grid; gap: 8px; max-height: 220px; overflow-y: auto; }
