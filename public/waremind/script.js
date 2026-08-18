@@ -1,5 +1,5 @@
 /* =========================================================
-   WAREMIND // NEXUS — AI Warehouse Command Center
+   Smart Warehouse Operations & Order Fulfillment System — AI Warehouse Command Center
    Pure JavaScript state engine (no libraries required)
    ========================================================= */
 
@@ -99,7 +99,7 @@ function computeDecisions() {
               `Competing orders for same SKU: ${competing}`,
               `Stockout risk: ${healthOf(item) === "ok" ? "LOW" : "HIGH"}`,
             ],
-            verdict: `${o.id} is a ${o.priority.toLowerCase()}-priority order due ${o.due}, but only ${item.available} of the ${o.qty} requested units of ${item.name} are on hand. Rather than blocking the whole order, WareMind recommends shipping ${item.available} units now and backordering the remaining ${o.qty - item.available}. This protects the delivery promise for the most urgent customer while keeping ${competing} competing order(s) unblocked.`,
+            verdict: `${o.id} is a ${o.priority.toLowerCase()}-priority order due ${o.due}, but only ${item.available} of the ${o.qty} requested units of ${item.name} are on hand. Rather than blocking the whole order, the system recommends shipping ${item.available} units now and backordering the remaining ${o.qty - item.available}. This protects the delivery promise for the most urgent customer while keeping ${competing} competing order(s) unblocked.`,
           },
         });
       }
@@ -130,7 +130,7 @@ function computeDecisions() {
             `Competing orders: ${state.orders.filter((o) => o.sku === i.sku && o.stage !== "Dispatch").length}`,
             `Stockout risk: ${healthOf(i) === "crit" ? "HIGH" : "MEDIUM"}`,
           ],
-          verdict: `Stock of ${i.name} has fallen below its reorder point. At the current outbound rate this SKU runs dry before the next inbound window, which would stall every order in Zone ${i.zone}. WareMind recommends raising a replenishment of ${i.reorder * 2 - i.available} units now.`,
+          verdict: `Stock of ${i.name} has fallen below its reorder point. At the current outbound rate this SKU runs dry before the next inbound window, which would stall every order in Zone ${i.zone}. The system recommends raising a replenishment of ${i.reorder * 2 - i.available} units now.`,
         },
       });
     });
@@ -547,4 +547,4 @@ function boot() {
 }
 
 document.addEventListener("DOMContentLoaded", boot);
-console.log("WAREMIND // NEXUS command center online");
+console.log("Smart Warehouse Operations & Order Fulfillment System command center online");
