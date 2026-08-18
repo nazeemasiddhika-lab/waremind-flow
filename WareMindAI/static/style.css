@@ -220,17 +220,13 @@ button.act.danger:hover { background: rgba(239, 68, 68, 0.16); }
 .ring span { font-size: 9px; letter-spacing: 0.14em; color: var(--muted); }
 .ring b { font-size: 18px; color: var(--cyan); }
 .ring:hover, .ring.active { background: rgba(34, 211, 238, 0.16); border-color: var(--cyan); }
-.r1 { width: 84px; height: 84px; border-color: rgba(239, 68, 68, 0.6); }
+.r1 { width: 84px; height: 84px; border-color: rgba(239, 68, 68, 0.6); place-content: center; }
 .r1 b { color: #fca5a5; }
-.r2 { width: 148px; height: 148px; }
-.r3 { width: 206px; height: 206px; }
-.r4 { width: 254px; height: 254px; }
-.r2 b, .r3 b, .r4 b { position: relative; top: -46px; }
-.r3 b { top: -75px; }
-.r4 b { top: -99px; }
-.r2 span, .r3 span, .r4 span { position: relative; top: -46px; }
-.r3 span { top: -75px; }
-.r4 span { top: -99px; }
+.r2, .r3, .r4 { place-content: start center; padding-top: 10px; }
+.r2 { width: 152px; height: 152px; }
+.r3 { width: 212px; height: 212px; }
+.r4 { width: 262px; height: 262px; }
+.ring b { line-height: 1.1; }
 
 .order-list { margin-top: 14px; display: grid; gap: 8px; max-height: 220px; overflow-y: auto; }
 .order {
