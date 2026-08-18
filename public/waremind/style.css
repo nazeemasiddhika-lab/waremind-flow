@@ -358,3 +358,5 @@ button.act.danger:hover { background: rgba(239, 68, 68, 0.16); }
   .shell { padding: 16px; }
   .topbar { flex-wrap: wrap; }
 }
+
+[hidden] { display: none !important; }
